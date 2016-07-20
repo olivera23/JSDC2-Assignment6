@@ -139,7 +139,7 @@ var Controller = {
       type: 'GET',
       url: 'http:/jacobfriedmann.com:3000/todos?num=1',
       success: function(data) {
-        data.forEach(function(task) {
+        data.tasks.forEach(function(task) {
           Model.addTask(task);
         });
         View.renderBoard();
