@@ -11,7 +11,7 @@ var Model = {
       text: 'world',
       status: 'doing',
       id: '4321'
-    }
+    },
     {
       text: '!!',
       status: 'done',
@@ -31,8 +31,9 @@ var Model = {
     });
   },
 
+/// missing task
   getDones: function() {
-    return this.tasks.filter(function() {
+    return this.tasks.filter(function(task) {
       return task.status === 'done';
     });
   },
@@ -84,6 +85,7 @@ var View = {
   },
 
   renderBoard: function() {
+    console.log("made it to renderboard function") //testing
     $('#todoInput').val('');
     $('#khanban').html(this.template(Model.getAllTasks()));
   }
@@ -100,7 +102,7 @@ var Controller = {
     $('#khanban').on('click', '.delete', this.handleDelete);
     $('#khanban').on('dragenter dragover', '.column', this.handleDrag);
     document.querySelector('#khanban').addEventListener('dragstart', this.handleDragStart);
-    document.querySelector('#kahnban').addEventListener('drop', this.handleDrop);
+    document.querySelector('#khanban').addEventListener('drop', this.handleDrop);
   },
 
   handleSubmit: function(event) {
@@ -140,7 +142,7 @@ var Controller = {
       url: 'http:/jacobfriedmann.com:3000/todos?num=1',
       success: function(data) {
         data.tasks.forEach(function(task) {
-          Model.addTask(task);
+          Model.addTask(tasks);
         });
         View.renderBoard();
       }
@@ -149,6 +151,7 @@ var Controller = {
 };
 
 function setup() {
+  console.log("made it to the setup function") // testing
   View.init();
   Controller.init();
 }
